@@ -18,13 +18,36 @@
 This module contains all constants and enums used across the project.
 """
 
+import os
+import tomllib
 from enum import Enum
+
+
+def get_package_version() -> str:
+    """
+    Read the package version from pyproject.toml.
+    Falls back to "unknown" if not found.
+
+    @return: Version string.
+    """
+    try:
+        pyproject_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "pyproject.toml")
+        with open(pyproject_path, "rb") as f:
+            data = tomllib.load(f)
+            return data.get("project", {}).get("version", "unknown")
+    except Exception:
+        return "unknown"
+
 
 VERBOSE_LOGGING = "VERBOSE_LOGGING"
 
 # doc-issues mode Action inputs
 DOC_ISSUES_PROJECT_STATE_MINING = "DOC_ISSUES_PROJECT_STATE_MINING"
 DOC_ISSUES_REPOSITORIES = "DOC_ISSUES_REPOSITORIES"
+
+# Source mode Action inputs
+DOC_SOURCE_REPOSITORIES = "DOC_SOURCE_REPOSITORIES"
+UI_TESTS_REPOSITORIES = "UI_TESTS_REPOSITORIES"
 
 # Supported issue labels
 DOC_USER_STORY_LABEL = "DocumentedUserStory"
@@ -36,10 +59,14 @@ SUPPORTED_ISSUE_LABELS = [DOC_USER_STORY_LABEL, DOC_FEATURE_LABEL, DOC_FUNCTIONA
 # Collector regimes
 class Mode(Enum):
     DOC_ISSUES = "DOC_ISSUES"
+    DOC_SOURCE = "DOC_SOURCE"
+    UI_TESTS = "UI_TESTS"
 
 
 # Regime output paths
 DOC_ISSUES_OUTPUT_PATH = "./output/doc-issues"
+DOC_SOURCE_OUTPUT_PATH = "doc-source"
+UI_TESTS_OUTPUT_PATH = "ui-tests"
 
 
 # GitHub API constants

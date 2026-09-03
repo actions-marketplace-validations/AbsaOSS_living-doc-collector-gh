@@ -175,5 +175,7 @@ cython_debug/
 
 run_script.sh
 output-example-project/
-output/doc-issues/doc-issues.json
 default_output.txt
+.DS_Store
+SPEC.md
+output/*
