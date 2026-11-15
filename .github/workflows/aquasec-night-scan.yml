@@ -36,7 +36,7 @@ permissions:
 
 jobs:
   aquasec-night-scan:
-    uses: AbsaOSS/organizational-workflows/.github/workflows/aquasec-scan.yml@ab0b5372e2ec35be6f9bccf364dd024486e59bc1
+    uses: AbsaOSS/organizational-workflows/.github/workflows/aquasec-scan.yml@6f18b83a300bd18ce845d00d6579d9c54f027cdc
     with:
       severity-priority-map: 'Critical=P0,High=P1,Medium=P2,Low=P3'
       project-number: 203
